@@ -10,3 +10,6 @@ UNet Semantic Segmentation: Training, Testing, and Deployment
 
 (2) 2nd dataset is download from the Pascal VOC2012 dataset using the code below.
 > torchvision.datasets.VOCSegmentation(root='data/PascalVOC_Dataset', year='2012', image_set='train', download=True)
+
+### Installation
+
