@@ -8,8 +8,6 @@ from tqdm import tqdm
 import matplotlib.pyplot as plt
 
 
-
-
 class DataAugmentation:
     def __init__(self, input_dir):
         """
@@ -55,7 +53,7 @@ class DataAugmentation:
         image_filenames = os.listdir(self.input_dir)
 
         # Create a progress bar
-        progress_bar = tqdm(total=len(image_filenames), desc="Augmenting Images")
+        progress_bar = tqdm(total=len(image_filenames), desc="Augmenting Data")
 
         # Iterate over images in the input directory
         for filename in image_filenames:
@@ -93,30 +91,32 @@ class DataAugmentation:
         original_image = cv2.imread(original_image_path)
 
         # Display original image
-        plt.subplot(2, 3, 1)
+        plt.subplot(1, 7, 1)
         plt.imshow(cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB))
-        plt.title("Original Image")
+        plt.title("Original Image", fontsize=4)  # Set the font size to 4
+        plt.axis('off')  # Remove axis scale bar and numbers
 
         # Generate augmented images
         augmented_images = self._make_augmented_images(original_image)
 
         # Display augmented images
         for i, augmented_image in enumerate(augmented_images):
-            plt.subplot(2, 3, i+2)
+            plt.subplot(1, 7, i+2)
             plt.imshow(cv2.cvtColor(augmented_image, cv2.COLOR_BGR2RGB))
-            plt.title(f"Augmented Image {i+1}")
+            plt.title(f"Augmented Image {i+1}", fontsize=4)  # Set the font size to 4
+            plt.axis('off')  # Remove axis scale bar and numbers
 
         plt.show()
 
 if __name__ == "__main__":
-    input_dir = "D:/Repos/UNet_semantic_segmentation/data/Aerial_Semantic_Segmenation_Drone_Dataset/dataset/semantic_drone_dataset/images"
+    input_dir = "D:/Repos/UNet_semantic_segmentation/data/Aerial_Semantic_Segmenation_Drone_Dataset/dataset/semantic_drone_dataset/labels"
 
     # Create an instance of DataAugmentation
     data_augmentation = DataAugmentation(input_dir)
 
     # Apply data augmentation and save augmented images
-    output_dir = "D:/Repos/UNet_semantic_segmentation/data/Aerial_Semantic_Segmenation_Drone_Dataset/dataset/semantic_drone_dataset/augmented_dataset/images"
-    data_augmentation.augment_data(output_dir)
+    # output_dir = "D:/Repos/UNet_semantic_segmentation/data/Aerial_Semantic_Segmenation_Drone_Dataset/dataset/semantic_drone_dataset/augmented_dataset/labels"
+    # data_augmentation.augment_data(output_dir)
 
     # Test the data augmentation by displaying the original and augmented images
-    data_augmentation.test_augmentation()
+    data_augmentation.test_augmentation(index=6)
