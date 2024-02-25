@@ -22,7 +22,8 @@ class DataSplit:
 
     def make_all_txt(self, output_directory):
         """
-        Create the 'all.txt' file containing the names of all the images.
+        Create the 'all.txt' file containing the names of all the images. 
+        'all.txt' is the text file that will be used to split the dataset into train, validation, and test sets.
 
         Args:
         - output_directory: The directory path where the 'all.txt' file will be saved.
@@ -41,14 +42,16 @@ class DataSplit:
         Args:
         - output_directory: The directory path where the train.txt, validation.txt, and test.txt files will be saved.
                             If not provided, the output_directory specified in make_all_txt() method will be used.
+                            And if the make_all_txt() method is not called before running split_dataset, it will raise a ValueError.
         - train_percent: The percentage of images to be used for the train set.
         - validation_percent: The percentage of images to be used for the validation set.
         - test_percent: The percentage of images to be used for the test set. If not provided, it will be calculated based on the remaining percentage.
         - shuffle: Whether to shuffle the image names before splitting.
 
         Note:
-        - The sum of train_percent, validation_percent, and test_percent should be 100 or less.
-        - If test_percent is not provided and train_percent + validation_percent is less than 100, the remaining percentage will be used for the test set.
+        - The sum of train_percent, validation_percent, and test_percent should be 100.
+        - If test_percent is not provided and train_percent + validation_percent is less than 100, the remaining percentage will be used for the test set. 
+        - If test_percent is not provided, the related test.txt file won't be created.
         """
         # (1) Validate the output directory:
         if output_directory is None:
